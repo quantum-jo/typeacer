@@ -1,42 +1,69 @@
 var a = document.getElementById("text").innerHTML;
  var count = 0;
 
- function activate(key){
- 	
-    if((key >= 65 && key <= 90) || key == " " || key == 8 || (key >= 97 && key <= 122) ){
+ 
+var startTime = new Date();
 
-    if(key == " "){
+
+
+ document.addEventListener("keyup", activate);
+
+ function activate(event){
+
+
+ 	
+    if( (event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode == 32 || event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 48 || event.keyCode == 250){
+
+    if(event.keyCode == 32){
         document.getElementById("id01").value = "";
  		
     } 	
 
     else{ 
-
+       
     	var textEnter = document.getElementById("id01").value;
  	    var l = textEnter.length;
  	    var lastChar = textEnter[l - 1];
  	
         if( a[count] == lastChar){ 
            document.getElementById("id01").setAttribute("style", "color: #008000");
-           //console.log(a[13]);
-           console.log('bye');
         }
 
 
         if(a[count] != lastChar){
            document.getElementById("id01").setAttribute("style", "color: #FF0000");
-           console.log("hi");
     	 }
 
 
     }
 
-        if(key != 8){
+        if(event.keyCode != 8){
         	count = count + 1;
         }
+
+        else{
+        	count = count - 1;
+        }
     }
-    }
+    
 
 
+if(count == a.length)
+{// later record end time
+var endTime = new Date();
 
+// time difference in ms
+var timeDiff = endTime - startTime;
+
+// strip the ms
+timeDiff /= 1000;
+
+// get seconds (Original had 'round' which incorrectly counts 0:28, 0:29, 1:30 ... 1:59, 1:0)
+var seconds = Math.round(timeDiff % 60);
+
+
+var speed = a.length/seconds;
+alert("speed is:" + Math.round(speed) + "wpm");
+}
   
+}
