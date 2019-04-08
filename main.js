@@ -1,7 +1,8 @@
-var a = document.getElementById("text").innerHTML;
+// var a = document.getElementById("text").innerHTML;
+var a = "ThemanwhopassesthesentenceshouldswingtheswordIfyouwouldtakethelifeofamanyouoweittohimtolookintohiseyesandhearhisfinalwordsandifyoucannotbeartodothatthenperhapsthemandoesnotdeservetodie";
  var count = 0;
 
- 
+
 var startTime = new Date();
 
 
@@ -11,21 +12,29 @@ var startTime = new Date();
  function activate(event){
 
 
- 	
+
     if( (event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode == 32 || event.keyCode == 8 || event.keyCode == 46 || event.keyCode == 48 || event.keyCode == 250){
 
     if(event.keyCode == 32){
         document.getElementById("id01").value = "";
- 		
-    } 	
 
-    else{ 
-       
+    }
+
+    else{
+
     	var textEnter = document.getElementById("id01").value;
  	    var l = textEnter.length;
  	    var lastChar = textEnter[l - 1];
- 	
-        if( a[count] == lastChar){ 
+
+
+      if(event.keyCode == 8){
+        count = count - 1;
+      }
+
+      console.log(a[count] + ' ' + lastChar);
+
+
+        if( a[count] == lastChar){
            document.getElementById("id01").setAttribute("style", "color: #008000");
         }
 
@@ -34,18 +43,15 @@ var startTime = new Date();
            document.getElementById("id01").setAttribute("style", "color: #FF0000");
     	 }
 
+       if(event.keyCode != 8) {
+         count++;
+       }
 
     }
 
-        if(event.keyCode != 8){
-        	count = count + 1;
-        }
 
-        else{
-        	count = count - 1;
-        }
     }
-    
+
 
 
 if(count == a.length)
@@ -65,5 +71,5 @@ var seconds = Math.round(timeDiff % 60);
 var speed = a.length/seconds;
 alert("speed is:" + Math.round(speed) + "wpm");
 }
-  
+
 }
